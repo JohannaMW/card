@@ -1,0 +1,23 @@
+Content-Type: multipart/alternative; boundary="===============1568351275=="
+MIME-Version: 1.0
+Subject: Welcome!
+From: webmaster@localhost
+To: hanna@gmx.de
+Date: Wed, 15 Oct 2014 17:30:13 -0000
+Message-ID: <20141015173013.4976.15065@johanna-ThinkPad-X230>
+
+--===============1568351275==
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Thank you for signing up for our website, hanna
+--===============1568351275==
+MIME-Version: 1.0
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<h2>Thanks hanna for signing up!</h2> <div>I hope you enjoy using our site</div>
+--===============1568351275==--
+
+-------------------------------------------------------------------------------
