@@ -52,8 +52,21 @@ class Card(models.Model):
         return u"{} of {}s".format(self.rank, self.get_suit_display())
 
 
+
 class Player(AbstractUser):
     phone = models.CharField(max_length=12, help_text="Format should be: 650-111-2222")
+
+    def get_wins(self):
+        return WarGame.objects.filter(player=self, result=WarGame.WIN).count()
+
+    def get_losses(self):
+        return WarGame.objects.filter(player=self, result=WarGame.LOSS).count()
+
+    def get_ties(self):
+        return WarGame.objects.filter(player=self, result=WarGame.TIE).count()
+
+    def get_record_display(self):
+        return "{}-{}-{}".format(self.get_wins(), self.get_losses(), self.get_ties())
 
 
 class WarGame(models.Model):

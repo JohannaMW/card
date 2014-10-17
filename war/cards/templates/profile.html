@@ -7,5 +7,7 @@
     <h2>Past Games</h2>
     {% for game in games %}
         <p>{{ game.get_result_display }}</p>
+        <p>Hi {{ user.username }}, you have {{ wins }} wins and {{ losses }} loses.</p>
+
     {% endfor %}
 {% endblock content %}

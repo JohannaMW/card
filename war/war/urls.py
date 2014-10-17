@@ -14,10 +14,13 @@ urlpatterns = patterns('',
     url(r'^first/filter/$', 'cards.views.first_filter', name='tags'),
     url(r'^suit/filter/$', 'cards.views.suit_filter', name='suits'),
     url(r'^profile/$', 'cards.views.profile', name='profile'),
+    url(r'^get_card/$', 'cards.views.get_card', name='get_card'),
     url(r'^faq/$', 'cards.views.faq', name='faq'),
     url(r'^blackjack/$', 'cards.views.blackjack', name='blackjack'),
     url(r'^poker/$', 'cards.views.poker', name='poker'),
     url(r'^war/$', 'cards.views.war', name='war'),
+    url(r'^interactive/$', 'cards.views.interactive', name='interactive'),
+
 
 
     url(r'^register/$', 'cards.views.register', name='register'),

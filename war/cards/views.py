@@ -1,19 +1,20 @@
-from django.conf import settings
+import json
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
-from django.core.mail import EmailMultiAlternatives
-from django.http import HttpResponseRedirect
+from django.core import serializers
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from cards.forms import EmailUserCreationForm
-from cards.models import Card, WarGame
+from forms import EmailUserCreationForm
+from models import Card, WarGame
+from utils import get_random_comic, create_deck
 
 
 def home(request):
     data = {
-        'cards': Card.objects.all()
+        'cards': Card.objects.all(),
+        'comic' : get_random_comic()
     }
 
-    return render(request, 'cards.html', data)
+    return render(request, 'home.html', data)
 
 
 def filters(request):
@@ -22,6 +23,24 @@ def filters(request):
     }
 
     return render(request, 'card_filters.html', data)
+
+def interactive(request):
+    return render(request, 'interactive.html')
+
+def get_card(request):
+    cards = list(Card.objects.order_by('?'))
+    user_card = cards[0]
+    print user_card
+    dealer_card = cards[1]
+    print dealer_card
+    card = { "user_card" : user_card.rank,
+              "dealer_card" : dealer_card.rank }
+    data = json.dumps(card)
+    return HttpResponse(data, content_type='application/json')
+
+# you still have to write the evaluation and storing of wins/loss'
+def result(request):
+    pass
 
 
 def template_tags(request):
@@ -51,7 +70,9 @@ def suit_filter(request):
 @login_required
 def profile(request):
     return render(request, 'profile.html', {
-        'games': WarGame.objects.filter(player=request.user)
+        'games': WarGame.objects.filter(player=request.user),
+        'wins': request.user.get_wins(),
+        'losses': request.user.get_losses()
     })
 
 
@@ -79,12 +100,7 @@ def register(request):
     if request.method == 'POST':
         form = EmailUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            text_content = 'Thank you for signing up for our website, {}'.format(user.username)
-            html_content = '<h2>Thanks {} for signing up!</h2> <div>I hope you enjoy using our site</div>'.format(user.username)
-            msg = EmailMultiAlternatives("Welcome!", text_content, settings.DEFAULT_FROM_EMAIL, [user.email])
-            msg.attach_alternative(html_content, "text/html")
-            msg.send()
+            form.save()
             return redirect("profile")
     else:
         form = EmailUserCreationForm()
