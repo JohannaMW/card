@@ -1,3 +1,3 @@
 playing-cards
 =============
-[ ![Codeship Status for JohannaMW/card_game](https://codeship.io/projects/5e0ed730-3869-0132-3bf5-3e83918148ed/status)](https://codeship.io/projects/42006)
+[ ![Codeship Status for JohannaMW/card](https://codeship.io/projects/2de6c690-386d-0132-8ce9-564e18eaa61d/status)](https://codeship.io/projects/42021)
